@@ -8,8 +8,8 @@ A decentralized social media platform that empowers users with full ownership an
 - [x] Share posts with optional images
 - [x] Connect to users' non-custodial wallets
 - [x] Tip posts with Ether (ETH)
-- [x] Display posts with the amount of tips received
-- [x] News feed sorted based on the amount of tips received
+- [x] Display posts based on tips received
+- [x] News feed sorted based on community engagement
 - [x] Decentralized and transparent platform
 - [x] Ownership and control over user data
 - [x] Censorship-resistant social media experience
