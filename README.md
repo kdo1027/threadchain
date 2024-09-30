@@ -1,6 +1,6 @@
 # threadchain
 
-A decentralized social media platform that empowers users with full ownership and control over their data while facing algorithmic content filtering. Built on the Ethereum blockchain, the platform ensures a censorship-resistant environment where users can share contents and opinions in a transparent ecosystem. By ranking content based on community-driven tips, threadchain is an ideal space for genuine social interactions and quality contents, offering an inclusive and decentralized alternative to traditional social media platforms.
+A decentralized social media platform that empowers users with full ownership and control over their data while facing algorithmic content filtering. Built on the Ethereum blockchain, the platform allows for tokenization, where users can own digital assets tied to their content or profiles, while ensuring a transparent ecosystem for sharing content and opinions. By ranking content based on community-driven tips, threadchain is an ideal space for genuine social interactions and quality contents, offering an inclusive and decentralized alternative to traditional social media platforms.
 
 ## Features
 
