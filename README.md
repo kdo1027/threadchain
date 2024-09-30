@@ -4,24 +4,28 @@ threadchain is a...
 
 ## Features
 
-- Access user profile
-- Share posts with optional images
-- Tip posts with Ether
-- Display posts with the amount of tips received
-- News feed sorted based on the amount of tips received
+- [x] Access user profile
+- [x] Share posts with optional images
+- [x] Connect to users' non-custodial wallets
+- [x] Tip posts with Ether (ETH)
+- [x] Display posts with the amount of tips received
+- [x] News feed sorted based on the amount of tips received
+- [x] Decentralized and transparent platform
+- [x] Ownership and control over user data
+- [x] Censorship-resistant social media experience
 
 ## Tech Stack
 
-- **React**
-- **Bootstrap**
-- **Axios**: A promise-based HTTP client for making API requests
-- **Identicon.js**: A library for generating identicons
-- **Solidity**: Writing smart contracts on the Ethereum blockchain.
-- **Truffle**: Ethereum development environment, testing framework, and asset pipeline 
-- **Ethereum**: A decentralized platform that runs smart contracts.
-- **Web3.js**: A JavaScript library for interacting with the Ethereum blockchain
-- **IPFS**: A peer-to-peer hypermedia protocol for storing and sharing files.
-- **Pinata**: A pinning service for managing IPFS files.
+- [x] React
+- [x] Bootstrap for CSS
+- [x] Axios: A promise-based HTTP client for making API requests
+- [x] Identicon.js: A library for generating identicons
+- [x] Solidity: Writing smart contracts on the Ethereum blockchain.
+- [x] Truffle: Ethereum development environment, testing framework, and asset pipeline 
+- [x] Ethereum: A decentralized platform that runs smart contracts.
+- [x] Web3.js: A JavaScript library for interacting with the Ethereum blockchain
+- [x] IPFS: A peer-to-peer hypermedia protocol for storing and sharing files.
+- [x] Pinata: A pinning service for managing IPFS files.
 
 ## Prerequisites
 
@@ -31,33 +35,30 @@ threadchain is a...
 - Ganache (or any Ethereum client)
 - MetaMask (or any Ethereum wallet)
 
-Install Dependencies
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
-## Usage
+## Compile Smart Contracts
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+truffle compile
 ```
 
-## Contributing
+## Migrate Smart Contracts
+Make sure your Ethereum client (e.g., Ganache) is running
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+```bash
+truffle migrate
+```
 
-Please make sure to update tests as appropriate.
+## Run the Application
+
+```bash
+npm run start
+```
 
 ## License
 
