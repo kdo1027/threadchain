@@ -36,6 +36,7 @@ A decentralized social media platform that empowers users with full ownership an
 - Truffle
 - Ganache (or any Ethereum client)
 - MetaMask (or any Ethereum wallet)
+- Pinata keys
 
 ## Install Dependencies
 
