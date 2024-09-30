@@ -10,6 +10,7 @@ contract SocialNetwork {
     struct Post {
         uint id;
         string content;
+        string imageHash;
         uint tipAmount;
         address payable author;
     }
@@ -17,6 +18,7 @@ contract SocialNetwork {
     event PostCreated(
         uint id,
         string content,
+        string imageHash,
         uint tipAmount,
         address payable author
     );
@@ -24,6 +26,7 @@ contract SocialNetwork {
     event PostTipped(
         uint id,
         string content,
+        string imageHash,
         uint tipAmount,
         address payable author
     );
@@ -33,15 +36,15 @@ contract SocialNetwork {
         name = "Dapp University Social Network";
     }
 
-    function createPost(string memory _content) public {
+    function createPost(string memory _content, string memory _imageHash) public {
         // Require valid content
         require(bytes(_content).length > 0);
         // Increment the post count
         postCount ++;
         // Create the post
-        posts[postCount] = Post(postCount, _content, 0, msg.sender);
+        posts[postCount] = Post(postCount, _content, _imageHash, 0, msg.sender);
         // Trigger an event
-        emit PostCreated(postCount, _content, 0, msg.sender);
+        emit PostCreated(postCount, _content, _imageHash, 0, msg.sender);
     }
 
     function tipPost(uint _id) public payable {
@@ -58,6 +61,6 @@ contract SocialNetwork {
         // Update the post
         posts[_id] = _post;
         // Trigger an event
-        emit PostTipped(postCount, _post.content, _post.tipAmount, _author);
+        emit PostTipped(postCount, _post.content, _post.imageHash, _post.tipAmount, _author);
     }
 }

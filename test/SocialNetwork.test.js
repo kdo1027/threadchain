@@ -28,9 +28,9 @@ require('chai')
 
   describe('posts', async () => {
     let result, postCount
-
+    const imageHash = 'QmTzQ1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1Q1p1'
     before(async () => {
-      result = await socialNetwork.createPost('This is my first post', { from: author })
+      result = await socialNetwork.createPost('This is my first post', imageHash, { from: author })
       postCount = await socialNetwork.postCount()
     })
 
@@ -40,17 +40,19 @@ require('chai')
       const event = result.logs[0].args
       assert.equal(event.id.toNumber(), postCount.toNumber(), 'id is correct')
       assert.equal(event.content, 'This is my first post', 'content is correct')
+      assert.equal(event.imageHash, imageHash, 'image hash is correct')
       assert.equal(event.tipAmount, '0', 'tip amount is correct')
       assert.equal(event.author, author, 'author is correct')
 
       // FAILURE: Post must have content
-      await socialNetwork.createPost('', { from: author }).should.be.rejected;
+      await socialNetwork.createPost('', imageHash, { from: author }).should.be.rejected;
     })
 
     it('lists posts', async () => {
         const post = await socialNetwork.posts(postCount)
         assert.equal(post.id.toNumber(), postCount.toNumber(), 'id is correct')
         assert.equal(post.content, 'This is my first post', 'content is correct')
+        assert.equal(post.imageHash, imageHash, 'image hash is correct')
         assert.equal(post.tipAmount, '0', 'tip amount is correct')
         assert.equal(post.author, author, 'author is correct')
     })
@@ -67,6 +69,7 @@ require('chai')
         const event = result.logs[0].args
         assert.equal(event.id.toNumber(), postCount.toNumber(), 'id is correct')
         assert.equal(event.content, 'This is my first post', 'content is correct')
+        assert.equal(event.imageHash, imageHash, 'image hash is correct')
         assert.equal(event.tipAmount, '1000000000000000000', 'tip amount is correct')
         assert.equal(event.author, author, 'author is correct')
       

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 
 class Main extends Component {
-
   render() {
     return (
       <div className="container-fluid mt-5">
@@ -10,11 +9,13 @@ class Main extends Component {
           <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
             <div className="content mr-auto ml-auto">
               <p>&nbsp;</p>
-                <form onSubmit={(event) => {
-                  event.preventDefault()
-                  const content = this.postContent.value
-                  this.props.createPost(content)
-                }}>
+              <h2>share your thread</h2>
+              <form onSubmit={(event) => {
+                event.preventDefault();
+                const content = this.postContent.value;
+                this.props.createPost(content);
+              }}>
+                <input type='file' onChange={this.props.captureFile} />
                 <div className="form-group mr-sm-2">
                   <input
                     id="postContent"
@@ -27,8 +28,8 @@ class Main extends Component {
                 <button type="submit" className="btn btn-primary btn-block">Share</button>
               </form>
               <p>&nbsp;</p>
-              { this.props.posts.map((post, key) => {
-                return(
+              {this.props.posts.map((post, key) => {
+                return (
                   <div className="card mb-4" key={key} >
                     <div className="card-header">
                       <img
@@ -41,6 +42,11 @@ class Main extends Component {
                     </div>
                     <ul id="postList" className="list-group list-group-flush">
                       <li className="list-group-item">
+                        {post.imageHash && (
+                          <p className="text-center">
+                            <img src={`https://gateway.pinata.cloud/ipfs/${post.imageHash}`} style={{ maxWidth: '420px' }} />
+                          </p>
+                        )}
                         <p>{post.content}</p>
                       </li>
                       <li key={key} className="list-group-item py-2">
@@ -51,9 +57,8 @@ class Main extends Component {
                           className="btn btn-link btn-sm float-right pt-0"
                           name={post.id}
                           onClick={(event) => {
-                            let tipAmount = window.web3.utils.toWei('0.1', 'Ether')
-                            console.log(event.target.name, tipAmount)
-                            this.props.tipPost(event.target.name, tipAmount)
+                            let tipAmount = window.web3.utils.toWei('0.1', 'Ether');
+                            this.props.tipPost(event.target.name, tipAmount);
                           }}
                         >
                           TIP 0.1 ETH

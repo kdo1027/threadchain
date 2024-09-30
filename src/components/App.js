@@ -5,6 +5,11 @@ import './App.css';
 import SocialNetwork from '../abis/SocialNetwork.json'
 import Navbar from './NavBar.js'
 import Main from './Main'
+import { create } from 'ipfs-http-client';
+import axios from 'axios';
+
+const pinataApiKey = '6c57ab8e116eba326e6c';
+const pinataSecretApiKey = '5fb4e49e3db16b2a41f090cef5767ad1dfca8d40b26aef9fa7835ce056909072';
 
 class App extends Component {
 
@@ -56,15 +61,42 @@ class App extends Component {
     }
   }
 
-  createPost(content) {
-    this.setState({ loading: true })
-    this.state.socialNetwork.methods.createPost(content).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
+  constructor(props) {
+    super(props);
+    this.state = {
+      account: '',
+      socialNetwork: null,
+      postCount: 0,
+      posts: [],
+      buffer: null,
+      content: ''
+    };
+
+    this.captureFile = this.captureFile.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
+    this.createPost = this.createPost.bind(this);
+    this.tipPost = this.tipPost.bind(this);
   }
 
-  tipPost(id, tipAmount) {
+  captureFile(event) {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      this.setState({ buffer: Buffer(reader.result) });
+    };
+  }
+
+  // createPost(content) {
+  //   this.setState({ loading: true })
+  //   this.state.socialNetwork.methods.createPost(content).send({ from: this.state.account })
+  //   .once('receipt', (receipt) => {
+  //     this.setState({ loading: false })
+  //   })
+  // }
+
+  async tipPost(id, tipAmount) {
     this.setState({ loading: true })
     this.state.socialNetwork.methods.tipPost(id).send({ from: this.state.account, value: tipAmount })
     .once('receipt', (receipt) => {
@@ -72,18 +104,46 @@ class App extends Component {
     })
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-      socialNetwork: null,
-      postCount: 0,
-      posts: [],
-      loading: true
-    }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     account: '',
+  //     socialNetwork: null,
+  //     postCount: 0,
+  //     posts: [],
+  //     loading: true
+  //   }
 
-    this.createPost = this.createPost.bind(this)
-    this.tipPost = this.tipPost.bind(this)
+  //   this.createPost = this.createPost.bind(this)
+  //   this.tipPost = this.tipPost.bind(this)
+  // }
+
+  async uploadImage() {
+    const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+    let data = new FormData();
+    data.append('file', new Blob([this.state.buffer]), 'image.png');
+
+    const response = await axios.post(url, data, {
+      maxContentLength: 'Infinity',
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        'pinata_api_key': pinataApiKey,
+        'pinata_secret_api_key': pinataSecretApiKey
+      }
+    });
+
+    return response.data.IpfsHash;
+  }
+
+  async createPost(content) {
+    let imageHash = '';
+    if (this.state.buffer) {
+      imageHash = await this.uploadImage();
+    }
+    this.state.socialNetwork.methods.createPost(content, imageHash).send({ from: this.state.account })
+      .once('receipt', (receipt) => {
+        this.setState({ content: '', buffer: null });
+      });
   }
 
   render() {
@@ -96,6 +156,7 @@ class App extends Component {
               posts={this.state.posts}
               createPost={this.createPost}
               tipPost={this.tipPost}
+              captureFile={this.captureFile}
             />
         }
       </div>
