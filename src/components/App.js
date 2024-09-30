@@ -8,8 +8,8 @@ import Main from './Main'
 import { create } from 'ipfs-http-client';
 import axios from 'axios';
 
-const pinataApiKey = '6c57ab8e116eba326e6c';
-const pinataSecretApiKey = '5fb4e49e3db16b2a41f090cef5767ad1dfca8d40b26aef9fa7835ce056909072';
+const pinataApiKey = 'key1';
+const pinataSecretApiKey = 'key2';
 
 class App extends Component {
 
