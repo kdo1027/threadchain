@@ -22,12 +22,12 @@ A decentralized social media platform that empowers users with full ownership an
 - [x] Bootstrap for CSS
 - [x] Axios: A promise-based HTTP client for making API requests
 - [x] Identicon.js: A library for generating identicons
-- [x] Solidity: Writing smart contracts on the Ethereum blockchain.
+- [x] Solidity: Writing smart contracts on the Ethereum blockchain
 - [x] Truffle: Ethereum development environment, testing framework, and asset pipeline 
-- [x] Ethereum: A decentralized platform that runs smart contracts.
+- [x] Ethereum: A decentralized platform that runs smart contracts
 - [x] Web3.js: A JavaScript library for interacting with the Ethereum blockchain
-- [x] IPFS: A peer-to-peer hypermedia protocol for storing and sharing files.
-- [x] Pinata: A pinning service for managing IPFS files.
+- [x] IPFS: A peer-to-peer hypermedia protocol for storing and sharing files
+- [x] Pinata: A pinning service for managing IPFS files
 
 ## Prerequisites
 
